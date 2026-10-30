@@ -43,6 +43,17 @@ static/style.css    estilos
 requirements.txt    dependências
 ```
 
+## Sobre segurança
+
+Esse projeto aplica três camadas:
+
+1. **Análise da AST** antes de executar: bloqueia `import`, acesso a atributos `__especiais__` e funções como `open`, `eval`, `exec`.
+2. **Builtins reduzidos:** o código do aluno só enxerga funções seguras (`len`, `range`, `sum`, etc.).
+3. **Processo isolado** (`python -I`) com **timeout de 3 segundos** e limite de memória (em Linux/macOS).
+
+> Esta proteção é adequada para uma demonstração e uso didático. Para colocar em produção seria
+> necessário um isolamento mais forte, como containers ou serviços dedicados de execução de código.
+
 ## Ideias de evolução
 
 - Cadastro de alunos e salvamento de progresso em banco de dados (SQLite).
