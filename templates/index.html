@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Desafios</h1>
+<p class="lead">Resolva os exercícios em ordem de dificuldade. Cada envio roda testes automáticos e mostra exatamente onde o código acertou ou errou.</p>
+
+<div class="progresso" aria-label="Progresso">
+  <div class="barra"><div class="preenchido" style="width: {{ progress }}%"></div></div>
+  <span>{{ solved|length }} de {{ exercises|length }} concluídos</span>
+</div>
+
+<div class="grade">
+  {% for ex in exercises %}
+  <a class="cartao" href="{{ url_for('exercise', exercise_id=ex.id) }}">
+    <div class="cartao-topo">
+      <span class="nivel nivel-{{ ex.nivel|lower }}">{{ ex.nivel }}</span>
+      {% if ex.id in solved %}<span class="ok">✔ Resolvido</span>{% endif %}
+    </div>
+    <h2>{{ ex.id }}. {{ ex.titulo }}</h2>
+    <p class="conceitos">{{ ex.conceitos|join(" · ") }}</p>
+  </a>
+  {% endfor %}
+</div>
+
+<form method="post" action="{{ url_for('reset') }}" class="reiniciar">
+  <button type="submit" class="botao-link">Reiniciar</button>
+</form>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{{ ex.titulo }} · PyGym{% endblock %}
+{% block content %}
+<a class="voltar" href="{{ url_for('index') }}">← Desafios</a>
+
+<div class="cabecalho">
+  <h1>{{ ex.id }}. {{ ex.titulo }}</h1>
+  <span class="nivel nivel-{{ ex.nivel|lower }}">{{ ex.nivel }}</span>
+</div>
+<p class="conceitos">Conceitos: {{ ex.conceitos|join(" · ") }}</p>
+
+<section class="enunciado">
+  <p>{{ ex.enunciado|replace("`", "") }}</p>
+</section>
+
+<form method="post">
+  <label for="code">Seu código</label>
+  <textarea id="code" name="code" spellcheck="false" rows="12">{{ code }}</textarea>
+  <div class="acoes">
+    <button type="submit" class="botao">▶ Teste</button>
+    <span class="dica-teclado">Tab insere 4 espaços</span>
+  </div>
+</form>
+
+{% if result %}
+<section class="resultado">
+  <h2>Resultado</h2>
+  {% if result.error %}
+    <div class="aviso erro"><strong>Ops:</strong> {{ result.error }}</div>
+  {% else %}
+    {% set total = result.results|length %}
+    {% set acertos = result.results|selectattr("passed")|list|length %}
+    <p class="placar">Passou em <strong>{{ acertos }}</strong> de <strong>{{ total }}</strong> testes.</p>
+    <table>
+      <thead><tr><th></th><th>Entrada</th><th>Esperado</th><th>Resultado</th></tr></thead>
+      <tbody>
+      {% for r in result.results %}
+        <tr class="{{ 'passou' if r.passed else 'falhou' }}">
+          <td>{{ '✔' if r.passed else '✘' }}</td>
+          <td><code>{{ ex.funcao }}({{ r.args }})</code></td>
+          <td><code>{{ r.expected }}</code></td>
+          <td>{% if r.error %}<span class="erro-texto">{{ r.error }}</span>{% else %}<code>{{ r.got }}</code>{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if show_hint %}
+<div class="aviso dica"><strong>💡 Dica:</strong> {{ ex.dica|replace("`", "") }}</div>
+{% elif attempts and not is_solved %}
+<p class="conceitos">Tentativas: {{ attempts }}. Uma dica aparece após 2 tentativas sem sucesso.</p>
+{% endif %}
+
+{% if is_solved %}
+<section class="solucao">
+  <h2>Solução comentada</h2>
+  <pre><code>{{ ex.solucao }}</code></pre>
+  <p>{{ ex.explicacao|replace("`", "") }}</p>
+  <p>Sua solução pode ser diferente e estar correta, o importante é que os testes passem.</p>
+  {% if next_id %}
+    <a class="botao" href="{{ url_for('exercise', exercise_id=next_id) }}">Próximo desafio →</a>
+  {% else %}
+    <a class="botao" href="{{ url_for('index') }}">Voltar</a>
+  {% endif %}
+</section>
+{% endif %}
+
+<script>
+
+  document.getElementById("code").addEventListener("keydown", function (e) {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const s = this.selectionStart;
+      this.value = this.value.slice(0, s) + "    " + this.value.slice(this.selectionEnd);
+      this.selectionStart = this.selectionEnd = s + 4;
+    }
+  });
+</script>
+{% endblock %}

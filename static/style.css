@@ -1,0 +1,48 @@
+:root{--roxo:#5b21b6;--roxo-claro:#ede9fe;--cinza:#6b7280;--borda:#e5e7eb;--verde:#15803d;--vermelho:#b91c1c}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#1f2937;background:#faf9ff;line-height:1.55}
+.topo{background:var(--roxo);color:#fff;padding:14px 24px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+.logo{color:#fff;font-weight:700;font-size:1.2rem;text-decoration:none}
+.sub{opacity:.85;font-size:.9rem}
+.container{max-width:860px;margin:0 auto;padding:24px 20px 48px}
+.rodape{text-align:center;color:var(--cinza);font-size:.8rem;padding:16px}
+h1{margin:.2em 0}
+.lead{color:var(--cinza)}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:20px}
+.cartao{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:16px;text-decoration:none;color:inherit;transition:.15s}
+.cartao:hover{border-color:var(--roxo);box-shadow:0 4px 14px rgba(91,33,182,.12);transform:translateY(-2px)}
+.cartao h2{font-size:1.05rem;margin:10px 0 4px}
+.cartao-topo{display:flex;justify-content:space-between;align-items:center}
+.conceitos{color:var(--cinza);font-size:.88rem;margin:4px 0}
+.ok{color:var(--verde);font-size:.85rem;font-weight:600}
+.nivel{font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--roxo-claro);color:var(--roxo)}
+.nivel-médio{background:#fef3c7;color:#92400e}
+.nivel-desafio{background:#fee2e2;color:#991b1b}
+.progresso{display:flex;align-items:center;gap:12px;margin:18px 0}
+.barra{flex:1;height:10px;background:var(--borda);border-radius:999px;overflow:hidden}
+.preenchido{height:100%;background:var(--roxo);transition:width .3s}
+.cabecalho{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.voltar{color:var(--roxo);text-decoration:none;font-size:.9rem}
+.enunciado{background:#fff;border-left:4px solid var(--roxo);padding:4px 18px;border-radius:6px;margin:14px 0}
+label{font-weight:600;display:block;margin:16px 0 6px}
+textarea{width:100%;font-family:ui-monospace,Consolas,monospace;font-size:.95rem;padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:#0f172a;color:#e2e8f0;resize:vertical;tab-size:4}
+.acoes{display:flex;align-items:center;gap:14px;margin-top:10px}
+.dica-teclado{color:var(--cinza);font-size:.8rem}
+.botao{display:inline-block;background:var(--roxo);color:#fff;border:0;padding:10px 20px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;text-decoration:none}
+.botao:hover{background:#4c1d95}
+.botao-link{background:none;border:0;color:var(--cinza);text-decoration:underline;cursor:pointer;font-size:.85rem}
+.reiniciar{margin-top:28px;text-align:center}
+.aviso{padding:12px 16px;border-radius:8px;margin:14px 0}
+.aviso.sucesso{background:#dcfce7;color:#166534}
+.aviso.erro{background:#fee2e2;color:#991b1b}
+.aviso.dica{background:#fef9c3;color:#854d0e}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;font-size:.9rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--borda)}
+th{background:#f3f4f6}
+tr.passou td:first-child{color:var(--verde);font-weight:700}
+tr.falhou td:first-child{color:var(--vermelho);font-weight:700}
+tr.falhou{background:#fff7f7}
+.erro-texto{color:var(--vermelho)}
+code{font-family:ui-monospace,Consolas,monospace}
+.solucao{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:8px 20px 20px;margin-top:24px}
+pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:8px;overflow-x:auto}
