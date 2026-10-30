@@ -3,7 +3,7 @@
 Lê um JSON da entrada padrão: {"code", "function", "tests"}
 Escreve um JSON na saída padrão com o resultado de cada teste.
 
-Camadas de proteção (ver README):
+Camadas de proteção:
 1. Análise da AST: bloqueia import, acesso a atributos "__dunder__" e nomes perigosos.
 2. Builtins reduzidos: o código só enxerga funções seguras.
 3. Processo isolado (python -I) com timeout, definido por quem chama este arquivo.
